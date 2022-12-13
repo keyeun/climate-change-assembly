@@ -1,0 +1,5 @@
+plotly==5.7.0
+protobuf~=3.19.0
+streamlit-aggrid==0.3.3
+gsheetsdb==0.1.13.1
+streamlit_option_menu==0.3.2
