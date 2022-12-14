@@ -38,7 +38,7 @@ topic_intro = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTBLls-
 topic_rank = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vT6AFAcm5mv-htTPaHUlEOmTLkSoRwRGbWfvKJpB02LwPg3Q3bZ9TRAOIuGPB8LW37UVLUl_yNg3SeK/pub?gid=456523749&single=true&output=csv')
 yy = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vSoAYOiuIHUBXvfQ6xf8yBeinK-zWmGlGtVWXb336K47Q28Ke_mjwM6V2wFaHVaZvJnt6_KrkLnpRim/pub?gid=0&single=true&output=csv')
 df = load_data('./data/conference_total.csv')
-clstr = load_data("./data//cluster.csv")
+clstr = load_data("https://docs.google.com/spreadsheets/d/e/2PACX-1vSyoeLyhung7IUTPARDqxlb_pf3XpytIksylGeySIQfagQQRTxuUJvRrMmjhhL_zHJvkBwbYu_yI8_s/pub?gid=889562349&single=true&output=csv")
 wc1 = load_image('./img/노무현green10.png')
 wc2 = load_image('./img/이명박green10-1.png')
 wc3 = load_image('./img/박근혜green10-1.png')
@@ -132,27 +132,43 @@ if a == '2. 전기자동차부터 탄소 배출량 감축까지':
   ''')
 
   st.subheader('폭염, 폭우, 가뭄 … 모든 정권이 법적 대책을 고민해')
+  topic_rank_1 = topic_rank[(topic_rank['content_topic'] == 2) | (topic_rank['content_topic'] == 3)]
+  fig_rank_1 = px.line(topic_rank_1,x='pres',y='count',facet_col='content_topic', facet_col_wrap=2, markers=True,width=900)
+  fig_rank_1.update_layout(font_family="Pretendard",xaxis_title='발의건수', yaxis_title='',margin_pad=10)
+  fig_rank_1.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+  st.plotly_chart(fig_rank_1)
   st.markdown('''
   각 정권 상위권 토픽(3위 이내)에 2번 이상 랭킹된 주제를 분석한 결과, 폭우, 가뭄 피해 대책 관련 의안(2번)이  박근혜 정권에서 3위, 이명박 정권에서 2위를 차지하였고, 폭염 대책 관련 의안(3번)이 각각이명박 정권에서 3위, 문재인 정권에서 3위를 차지한 것을 밝혀냈습니다. 즉, 폭염 그리고 폭우, 가뭄에 대해 모든 정권이 법적인 예방 내지 해결책을 도모하였다고 해석할 수 있습니다. 특히, 문재인 정권에서는 3번 주제 클러스터에 기후보건건강영향평가, 기후변화 인지 예결산 제도 관련 법안 발의가 추가된 것이 특징입니다. 
   ''')
 
+
   st.subheader('이명박 정부 당시 국회의 핵심 논의는 친환경 교통 수단 중심')
+  topic_rank_2 = topic_rank[(topic_rank['content_topic'] == 1) | (topic_rank['content_topic'] == 6)| (topic_rank['content_topic'] == 10)]
+  fig_rank_2 = px.line(topic_rank_2,x='pres',y='count',facet_col='content_topic', facet_col_wrap=3, markers=True,width=900)
+  fig_rank_2.update_layout(font_family="Pretendard",xaxis_title='발의건수', yaxis_title='',margin_pad=10)
+  fig_rank_2.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+  st.plotly_chart(fig_rank_2)
   st.markdown('''
-  이명박 정권은 ‘녹색성장’을 핵심 정책으로 내세운 정부이기 때문에, 특히 주목해서 볼 필요가 있습니다. 이명박 정부에서 발의한 기후변화 발의안 중, 가장 많은 주제를 차지한 것은 ‘전기자동차’였습니다. 해당 정권 때 특히 하이브리드 차량, 전기자동차 관련 법안을 마련하고자 하는 움직임이 컸음을 알 수 있습니다. 실제로 이명박 정부는 [청와대에서 전기자동차 시승을 진행](https://www.ytn.co.kr/_ln/0101_201009091604133712)하는 등 전기자동차에 대한 큰 관심을 보였습니다. 박근혜 정부에서 관련 의안 발의가 감소한 후, 문재인 정권 때 다시 증가해 4위 토픽으로 부상했습니다. 이어, 이명박 정권에서 관심을 가진 주제는 ‘산림 보호 및 임업 지원’으로, 관련하여 21건의 법률안이 발의되었습니다. 
+  이명박 정권은 ‘녹색성장’을 핵심 정책으로 내세운 정부이기 때문에, 특히 주목해서 볼 필요가 있습니다. 이명박 정부에서 발의한 기후변화 발의안 중, 가장 많은 주제를 차지한 것은 ‘전기자동차’(1번)였습니다. 해당 정권 때 특히 하이브리드 차량, 전기자동차 관련 법안을 마련하고자 하는 움직임이 컸음을 알 수 있습니다. 실제로 이명박 정부는 [청와대에서 전기자동차 시승을 진행](https://www.ytn.co.kr/_ln/0101_201009091604133712)하는 등 전기자동차에 대한 큰 관심을 보였습니다. 박근혜 정부에서 관련 의안 발의가 감소한 후, 문재인 정권 때 다시 증가해 4위 토픽으로 부상했습니다. 이어, 이명박 정권에서 관심을 가진 주제는 ‘산림 보호 및 임업 지원’으로, 관련하여 21건의 법률안이 발의되었습니다. 
   ''')
   st.markdown('''
   이명박 정권 이후 꾸준히 감소한 주제도 있었습니다. 바로 10번, 저탄소 친환경 대중 교통 수단을 다룬 법안 클러스터였습니다. 저탄소 녹색성장의 교통수단 ‘노면전차’를 도입하자는 목소리와 자전거 이용 및 자전거 산업을 활성화하자는 움직임과 맞물려 등장했습니다. 특히, [자전거 도로는 이명박 정부의 핵심 사업이었던 만큼](https://www.hankyung.com/society/article/2017052271297) 정부의 핵심 사업이 법안 발의에 큰 영향을 주었음을 시사합니다. 
   ''')
 
   st.subheader('탄소 배출량 감축, 문재인 정부 들어 본격 논의 시작')
+  topic_rank_3 = topic_rank[(topic_rank['content_topic'] == 0) | (topic_rank['content_topic'] == 4)| (topic_rank['content_topic'] == 13)| (topic_rank['content_topic'] == 15) | (topic_rank['content_topic'] == 16)]
+  fig_rank_3 = px.line(topic_rank_3,x='pres',y='count',facet_col='content_topic', facet_col_wrap=3, markers=True,width=900,height=600)
+  fig_rank_3.update_layout(font_family="Pretendard",xaxis_title='발의건수', yaxis_title='',margin_pad=10)
+  fig_rank_3.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+  st.plotly_chart(fig_rank_3)
   st.markdown('''
   문재인 정부 들어 기후변화 관련 발의가 대폭 증가한 것은 사실입니다. 그러나, 특히 전 정권 대비 새로 등장한 토픽, 또는 증가율이 높은 주제의 의안에는 무엇이 있을까요? 이를 알아보기 위해, 박근혜 정권 대비 증가율 500% 이상인 동시에 이명박 정권 대비 증가율 100% 이상인 주제를 추려보았습니다. 
   ''')
   st.markdown('''
-  우선 온실가스 감축을 다룬 의안들이 압도적으로 많이 증가한 것을 확인할 수 있었습니다. 전 정권에서, 2건 → 7건 → 9건에 머물렀던 의안 수는 문재인 정부에서 57건으로 큰 상승폭을 그리며 문정부 전체 기후변화 의안 주제 중 1위를 달성했습니다. 즉, 온실가스, 특히 탄소 배출 저감에 대한 본격적인 법적 논의가 진행되었음을 알 수 있습니다. 더불어, 문정부에서 강조한 ‘탄소중립’과도 큰 연관이 있어보입니다. 이처럼 정부의 정책과 연관이 있는 토픽 클러스터를 더 확인해 볼 수 있습니다. 수소경제 관련 의안(21건)과 탄소중립에 따른 일자리 전환 대응 관련 의안(20건)은 전 정권에서 등장하지 않았던, 혹은 1건 이하로 등장했던 주제입니다. 이는 문정부가 수소경제와 그린 뉴딜 사업을 강조했던 것의 연장선이라고 보여집니다.  
+  우선 온실가스 감축을 다룬 의안들(0번)이 압도적으로 많이 증가한 것을 확인할 수 있었습니다. 전 정권에서, 2건 → 7건 → 9건에 머물렀던 의안 수는 문재인 정부에서 57건으로 큰 상승폭을 그리며 문정부 전체 기후변화 의안 주제 중 1위를 달성했습니다. 즉, 온실가스, 특히 탄소 배출 저감에 대한 본격적인 법적 논의가 진행되었음을 알 수 있습니다. 더불어, 문정부에서 강조한 ‘탄소중립’과도 큰 연관이 있어보입니다. 이처럼 정부의 정책과 연관이 있는 토픽 클러스터를 더 확인해 볼 수 있습니다. 수소경제 관련 의안(21건, 15번)과 탄소중립에 따른 일자리 전환 대응 관련 의안(20건, 16번)은 전 정권에서 등장하지 않았던, 혹은 1건 이하로 등장했던 주제입니다. 이는 문정부가 수소경제와 그린 뉴딜 사업을 강조했던 것의 연장선이라고 보여집니다.  
   ''')
   st.markdown('''
-  신재생 에너지 관련 의안(39건)과 기후변화에 따른 농어업 부진에 대한 대책(26건)을 다룬 의안 수도 증가했습니다. 다만, 후자의 토픽은 앞선 챕터에서 다룬 황주홍 의원(전남 고흥군보성군장흥군강진군)이 19건 발의했다는 점을 고려해야합니다. 
+  신재생 에너지 관련 의안(39건, 4번)과 기후변화에 따른 농어업 부진에 대한 대책(26건, 13번)을 다룬 의안 수도 증가했습니다. 다만, 후자의 토픽은 앞선 챕터에서 다룬 황주홍 의원(전남 고흥군보성군장흥군강진군)이 19건 발의했다는 점을 고려해야합니다. 
   ''')
 
 
