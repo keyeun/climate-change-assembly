@@ -209,7 +209,8 @@ if a == '3. 회의록 분석':
   # scatter plot
   fig = px.scatter(clstr, x =  "x" , y = "y", color="labels", hover_data=["labels","doc"], 
                   opacity=0.5,
-                  width=800,height=600)
+                  width=800,height=600,
+                  color_continuous_scale="inferno")
   fig.update_traces(marker_size=5)
   fig.update_layout(
       hovermode="closest",
@@ -252,7 +253,7 @@ if a == '3. 회의록 분석':
     x = party,
     y = topic_list,
     z = politic,
-    type = 'heatmap'
+    type = 'heatmap'  
   )
   data= [trace]
   fig3 = go.Figure(data = data)
