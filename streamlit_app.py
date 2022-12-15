@@ -45,7 +45,6 @@ wc3 = load_image('./img/박근혜green10-1.png')
 wc4 = load_image('./img/문재인green10.png')
 
 with st.sidebar:
-    #a = st.selectbox('카테고리', ('소개','구글/트위터 인기 검색 키워드','온라인 커뮤니티 인기 게시물', '오늘의 주요 키워드 랭킹'))
     a = option_menu('카테고리', ['소개','1. 기후변화 관련 법안, 누가 많이 발의했나','2. 전기자동차부터 탄소 배출량 감축까지','3. 회의록 분석'],styles={"nav-link-selected": {"background-color": "#1C261F"}})
     st.markdown('---')
     st.markdown(
@@ -247,7 +246,6 @@ if a == '3. 회의록 분석':
   ''')
 
   # 정당별
-
   party = ['보수','진보','기타']
   topic_list = ['토픽 0','토픽 1','토픽 2','토픽 3','토픽 4','토픽 5','토픽 6','토픽 7','토픽 8','토픽 9','토픽 10','토픽 11','토픽 12','토픽 13','토픽 14']
   trace = go.Heatmap(
